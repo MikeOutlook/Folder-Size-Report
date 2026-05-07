@@ -1,88 +1,25 @@
+<div align="center">
+
 # Folder Size Report
 
-电脑空间快满了，却不知道到底是哪个文件夹在“偷偷长胖”？
+**一键扫描，揪出磁盘空间"大户"**
 
-这个小工具就是为这种时刻准备的。你只需要输入一个**绝对路径**，比如 `E:\`、`D:\Downloads` 或 `C:\Users\YourName\Desktop`，它就会帮你快速统计该目录下**每个一级子文件夹**占了多少空间，并按大小从大到小排好，结果清晰、直观、适合一眼定位“空间大户”。
+[![Windows](https://img.shields.io/badge/platform-Windows%2010%2F11-blue?logo=windows)](https://github.com/MikeOutlook/Folder-Size-Report)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE?logo=powershell)](https://github.com/MikeOutlook/Folder-Size-Report)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/MikeOutlook/Folder-Size-Report/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/MikeOutlook/Folder-Size-Report?color=orange)](https://github.com/MikeOutlook/Folder-Size-Report/releases/latest)
 
-它尤其适合这些场景：
+[English](#quick-start) · 简体中文
 
-- 想知道整个磁盘里哪个文件夹最占空间
-- 想快速检查下载目录、项目目录、资料盘是否“爆仓”
-- 不想装额外软件，只想双击一下就看到结果
+</div>
 
-## 你会得到什么
+---
 
-- 按容量**从大到小排序**的文件夹列表
-- 自动换算成 `KB / MB / GB / TB`
-- 每个文件夹的**占比**
-- 一眼能看懂的**条形图**
-- 扫描进度提示
-- 遇到无权限目录时自动跳过，并给出提示
-- 支持**双击运行**
-- 支持**把文件夹直接拖到 `.bat` 上运行**
-- 也支持命令行高级用法
+电脑空间快满了，却不知道谁在"偷偷长胖"？
 
-## 文件说明
+Folder Size Report 是一个**零依赖、开箱即用**的 Windows 文件夹容量统计工具。输入一个路径，它就帮你把每个一级子文件夹的大小排好，**从大到小、一目了然**。
 
-- `folder-size-report.bat`
-  面向普通用户。双击即可运行。
-- `folder-size-report.ps1`
-  真正执行统计逻辑的 PowerShell 脚本。
-
-请把这两个文件放在**同一个文件夹**里使用，因为 `.bat` 会调用同目录下的 `.ps1`。
-
-## 30 秒上手
-
-### 方法 1：双击运行，最省心
-
-1. 双击 `folder-size-report.bat`
-2. 在弹出的窗口里输入绝对路径，例如：
-
-```text
-E:\
 ```
-
-3. 按回车，等待扫描完成
-
-### 方法 2：拖拽运行，最方便
-
-把任意文件夹直接拖到 `folder-size-report.bat` 上，它会自动扫描这个文件夹。
-
-### 方法 3：命令行运行，最灵活
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\"
-```
-
-## 常用示例
-
-扫描整个 `E:\`：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\"
-```
-
-只看最大的前 15 个文件夹：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\" -Top 15
-```
-
-把目标目录根下的零散文件也一起统计：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\" -IncludeRootFiles
-```
-
-关闭彩色输出：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\" -NoColor
-```
-
-## 输出长什么样
-
-```text
 ========================================================================================
 Folder Size Report
 Path      : E:\
@@ -92,80 +29,94 @@ Generated : 2026-04-17 11:35:02
 Notice    : 2 inaccessible item(s) were skipped.
 ========================================================================================
 #     Folder                                         Size    Share  Visual
---------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
    1  01_网课汇总                                   899.88 GB    60.0%  #################-----------
    2  00_Notes from Senior Students             289.77 GB    19.3%  #####-----------------------
    3  05_WeChat and QQ                          100.08 GB     6.7%  ##--------------------------
 ========================================================================================
 ```
 
-你不需要逐个去点开文件夹找罪魁祸首，排在最上面的通常就是最值得先清理的对象。
+## Why This Tool?
 
-## 参数说明
+- **不想装软件？** — 两个文件，下载即用，绿色无污染
+- **不想敲命令？** — 双击 `.bat` 或拖拽文件夹即可运行
+- **找不到罪魁祸首？** — 自动按大小排序，最大的永远在最上面
+- **目录结构复杂？** — 递归统计每个子文件夹的总大小，深层也不放过
 
-| 参数 | 作用 |
-| --- | --- |
-| `-Path` | 要扫描的绝对路径 |
-| `-Top` | 只显示最大的前 N 个文件夹 |
-| `-IncludeRootFiles` | 统计目标目录根下的文件，并作为 `[Root files]` 单独显示 |
-| `-NoColor` | 关闭彩色输出 |
+## Quick Start
 
-## 适用环境
+### 双击运行
 
-- Windows
+双击 `folder-size-report.bat`，输入绝对路径，回车。
+
+### 拖拽运行
+
+把任意文件夹拖到 `folder-size-report.bat` 上，自动扫描。
+
+### 命令行
+
+```powershell
+# 基本用法
+powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\"
+
+# 只看最大的 15 个文件夹
+powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\" -Top 15
+
+# 把根目录下的零散文件也统计进来
+powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\" -IncludeRootFiles
+
+# 关闭彩色输出（适合重定向到文件）
+powershell -ExecutionPolicy Bypass -File .\folder-size-report.ps1 -Path "E:\" -NoColor > report.txt
+```
+
+## Features
+
+| 特性 | 说明 |
+| :--- | :--- |
+| 智能单位换算 | 自动转换为 KB / MB / GB / TB，直观易读 |
+| 占比可视化 | 百分比 + 条形图，一眼看出谁最占空间 |
+| 彩色输出 | 最大项绿色高亮，超过 20% 黄色提醒 |
+| 无权限跳过 | 自动跳过系统保护目录，不会卡住或报错 |
+| 防循环递归 | 自动识别并跳过符号链接（ReparsePoint） |
+| 进度提示 | 实时显示扫描进度 |
+| 零依赖 | 无需安装任何额外组件，PowerShell 5.1+ 即可运行 |
+
+## Parameters
+
+| 参数 | 必填 | 说明 |
+| :--- | :---: | :--- |
+| `-Path` | 是 | 要扫描的绝对路径，如 `E:\`、`D:\Downloads` |
+| `-Top` | 否 | 只显示最大的前 N 个文件夹 |
+| `-IncludeRootFiles` | 否 | 统计目标路径根下的零散文件，显示为 `[Root files]` |
+| `-NoColor` | 否 | 关闭彩色输出，适合重定向到文件或日志 |
+
+## File Description
+
+```
+folder-size-report/
+├── folder-size-report.bat   # 入口脚本，双击运行
+├── folder-size-report.ps1   # 核心逻辑（PowerShell）
+└── README.md
+```
+
+> `.bat` 和 `.ps1` 需要放在**同一目录**下。
+
+## FAQ
+
+**Q: 有些文件夹显示 0 B？**
+该文件夹确实几乎为空，或者部分内容因权限不足被跳过。顶部会提示跳过了多少项。
+
+**Q: 扫描整个磁盘很慢？**
+脚本会递归遍历所有文件计算大小。磁盘越大、文件越多，耗时越长，这是正常现象。
+
+**Q: 提示"路径无效"？**
+请输入绝对路径（如 `E:\`、`C:\Users\Name\Downloads`），不要使用相对路径。
+
+## Requirements
+
+- Windows 10 / 11
 - PowerShell 5.1 及以上
 
-一般来说，Windows 10 / 11 都可以直接运行。
+## License
 
-## 使用建议
-
-- 想看整个盘谁最占空间，直接扫 `E:\`、`D:\`、`C:\`
-- 如果目录非常大，扫描会花一点时间，这是正常的
-- 第一次定位空间问题时，建议先用 `-Top 10` 或 `-Top 15`
-- 如果你主要靠双击使用，优先打开 `folder-size-report.bat`
-
-## 常见问题
-
-### 1. 为什么有些文件夹显示为 0 B？
-
-可能原因有两个：
-
-- 这个一级文件夹里确实几乎没有内容
-- 某些系统目录或受保护目录无法完整读取，因此被跳过
-
-脚本会在顶部提示有多少项被跳过。
-
-### 2. 为什么扫整个磁盘会比较慢？
-
-因为脚本会递归统计每个一级子文件夹下的所有文件大小。目录越大、文件越多，耗时就越长。
-
-### 3. 为什么我输入路径后提示路径无效？
-
-请确认你输入的是**绝对路径**，例如：
-
-- `E:\`
-- `D:\Downloads`
-- `C:\Users\YourName\Documents`
-
-不要只输入相对路径，比如：
-
-- `Downloads`
-- `.\test`
-
-### 4. `.bat` 和 `.ps1` 应该用哪个？
-
-- 只想直接用：选 `.bat`
-- 想加参数、自定义显示方式：选 `.ps1`
-
-## 适合分享给谁
-
-- 想清理磁盘空间的同学
-- 经常下载资料、视频、数据集的人
-- 电脑里项目、课程、照片、安装包很多的人
-- 想要一个比“手动点文件夹”高效得多的小工具的人
-
-## 一句话总结
-
-这是一个**简单、直接、对普通用户友好**的 Windows 文件夹容量统计工具。
-
-输入一个绝对路径，它就会告诉你：**空间到底被谁占走了。**
+This project is licensed under the MIT License.
